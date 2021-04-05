@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Vanilla JS Accordion Menu Nested</title>
+</head>
+
+<body>
+
+  <h2>
+    Accordion Nested Menu
+  </h2>
+
+  <style type="text/css">
+    /* Optional styling for demo purpose */
+    body {
+      max-width: 40em;
+      width: 88%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .accordion-menu--hidden {
+      display: none;
+    }
+
+    /* Required styling */
+    .accordion-menu__list,
+    .accordion-menu__sublist {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    .accordion-menu__list {
+      border-top: 1px #eee solid;
+    }
+    .accordion-menu__link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px #eee solid;
+    }
+    .accordion-menu__icon {
+      position: relative;
+      width: 16px;
+      height: 16px;
+      transition: .2s all;     
+    }
+    .accordion-menu__icon:before,
+    .accordion-menu__icon:after {
+      content: "";
+      display: block;
+      background-color: #333;
+      position: absolute;		
+      top: 50%; left: 0;
+      transition: .35s;
+      width: 100%;
+      height: 2px; 
+    }
+    .accordion-menu__icon:before {
+      transform: translateY(-50%);
+    }
+    .accordion-menu__icon:after {
+      transform: translateY(-50%) rotate(90deg);
+    }
+    .accordion-menu--active .accordion-menu__icon:before {
+      transform: translateY(-50%) rotate(-90deg);
+			opacity: 0;
+    }
+    .accordion-menu--active .accordion-menu__icon:after {
+      transform: translateY(-50%) rotate(0);
+    }
+    .accordion-menu__sublist {
+      margin-left: 1.25rem;
+    }
+    .accordion-menu__sublink {
+      display: block;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px #eee solid;
+    }
+
+    .accordion-menu-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 1rem;
+      overflow: scroll;
+    }
+    .accordion-menu-nav__link:not(:last-child) {
+      margin-right: 1rem;
+    }
+    .accordion-menu-wrapper {
+      display: none;
+    }
+    .accordion-menu-wrapper.active {
+      display: block;
+    }
+
+  </style>
+
+  <nav role="navigation" class="accordion-menu-nav">
+    <a
+      href="#menu-parent-1"
+      class="accordion-menu-nav__link"
+      data-accordion-menu-nav>
+      Women's
+    </a>
+    <a
+      href="#menu-parent-2"
+      class="accordion-menu-nav__link"
+      data-accordion-menu-nav>
+      Men's
+    </a>
+    <a
+      href="#menu-parent-3"
+      class="accordion-menu-nav__link"
+      data-accordion-menu-nav>
+      Accessories
+    </a>
+    <a
+      href="#menu-parent-4"
+      class="accordion-menu-nav__link"
+      data-accordion-menu-nav>
+      Collections
+    </a>            
+  </nav>
+
+  <div class="accordion-menu-wrapper active" id="menu-parent-1" data-accordion-wrapper>
+    <nav role="navigation" class="accordion-menu">
+      <ul class="accordion-menu__list">
+        <li class="accordion-menu__item">
+          <a
+            href="#menu-1"
+            class="accordion-menu__link"
+            data-accordion-menu>
+            <span>
+              Menu 1 Dropdown
+            </span>
+            <span class="accordion-menu__icon"></span>
+          </a>
+          <ul class="accordion-menu__sublist accordion-menu--hidden" id="menu-1">
+            <li>
+              <a href="#" class="accordion-menu__sublink">
+                Child Menu 1
+              </a>
+            </li>
+            <li>
+              <a
+                href="#menu-1-1"
+                class="accordion-menu__link"
+                data-accordion-menu>
+                <span>
+                  Child Menu 2 Dropdown
+                </span>
+                <span class="accordion-menu__icon"></span>
+              </a>
+              <ul class="accordion-menu__sublist accordion-menu--hidden" id="menu-1-1">
+                <li>
+                  <a href="#" class="accordion-menu__sublink">
+                    Grand Child Menu 1
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="accordion-menu__sublink">
+                    Grand Child Menu 2
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="accordion-menu__item">
+          <a
+            href="#menu-2"
+            class="accordion-menu__link"
+            data-accordion-menu>
+            <span>
+              Menu 2 Dropdown
+            </span>
+            <span class="accordion-menu__icon"></span>
+          </a>
+          <ul class="accordion-menu__sublist accordion-menu--hidden" id="menu-2">
+            <li>
+              <a href="#" class="accordion-menu__sublink">
+                Child Menu 2
+              </a>
+            </li>
+            <li>
+              <a
+                href="#menu-2-1"
+                class="accordion-menu__link"
+                data-accordion-menu>
+                <span>
+                  Child Menu 2 Dropdown
+                </span>
+                <span class="accordion-menu__icon"></span>
+              </a>
+              <ul class="accordion-menu__sublist accordion-menu--hidden" id="menu-2-1">
+                <li>
+                  <a href="#" class="accordion-menu__sublink">
+                    Grand Child Menu 1
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="accordion-menu__sublink">
+                    Grand Child Menu 2
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li class="accordion-menu__item">
+          <a href="#" class="accordion-menu__link">
+            Submenu item
+          </a>
+        </li>        
+      </ul>
+    </nav>
+  </div>
+
+  <div class="accordion-menu-wrapper" id="menu-parent-2" data-accordion-wrapper>
+    <nav role="navigation" class="accordion-menu">
+      <ul class="accordion-menu__list">
+        <li class="accordion-menu__item">
+          <a href="#" class="accordion-menu__link">
+            Submenu item 123
+          </a>
+        </li>        
+        <li class="accordion-menu__item">
+          <a href="#" class="accordion-menu__link">
+            Submenu item 456
+          </a>
+        </li>
+        <li class="accordion-menu__item">
+          <a href="#" class="accordion-menu__link">
+            Submenu item 789
+          </a>
+        </li>        
+      </ul>
+    </nav>
+  </div>  
+
+  <div class="accordion-menu-wrapper" id="menu-parent-3" data-accordion-wrapper>
+    <nav role="navigation" class="accordion-menu">
+      <ul class="accordion-menu__list">
+        <li class="accordion-menu__item">
+          <a href="#" class="accordion-menu__link">
+            Submenu item 987
+          </a>
+        </li>        
+        <li class="accordion-menu__item">
+          <a href="#" class="accordion-menu__link">
+            Submenu item 6554
+          </a>
+        </li>       
+      </ul>
+    </nav>
+  </div>  
+  
+  <div class="accordion-menu-wrapper" id="menu-parent-4" data-accordion-wrapper>
+    <nav role="navigation" class="accordion-menu">
+      <ul class="accordion-menu__list">
+        <li class="accordion-menu__item">
+          <a href="#" class="accordion-menu__link">
+            Submenu item 1369
+          </a>
+        </li>        
+        <li class="accordion-menu__item">
+          <a href="#" class="accordion-menu__link">
+            Submenu item 2468
+          </a>
+        </li>
+        <li class="accordion-menu__item">
+          <a href="#" class="accordion-menu__link">
+            Submenu item 0178
+          </a>
+        </li>   
+        <li class="accordion-menu__item">
+          <a href="#" class="accordion-menu__link">
+            Submenu item 321
+          </a>
+        </li>              
+      </ul>
+    </nav>
+  </div>   
+
+  <script>
+
+    var accordionMenu = function () {
+
+      /**
+      * Element.closest() polyfill
+      * https://developer.mozilla.org/en-US/docs/Web/API/Element/closest#Polyfill
+      */
+      if (!Element.prototype.closest) {
+        if (!Element.prototype.matches) {
+          Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
+        }
+        Element.prototype.closest = function (s) {
+          var el = this;
+          var ancestor = this;
+          if (!document.documentElement.contains(el)) return null;
+          do {
+            if (ancestor.matches(s)) return ancestor;
+            ancestor = ancestor.parentElement;
+          } while (ancestor !== null);
+          return null;
+        };
+      }
+
+      // Listen for click on the document
+      // Accordiom menu functionality
+      document.addEventListener('click', function (event) {
+
+        // Bail if our clicked element doesn't match
+        var trigger = event.target.closest('[data-accordion-menu]');
+        if (!trigger) return;
+
+        // Get the target content
+        var target = document.querySelector(trigger.hash);
+        if (!target) return;
+
+        // Prevent default link behavior
+        event.preventDefault();
+
+        // Toggle our content
+        target.classList.toggle('accordion-menu--hidden');
+
+        // Toggle trigger class
+        trigger.classList.toggle('accordion-menu--active');
+      });
+
+      // Listen for click on the document
+      // Accordion parent menu functionality
+      document.addEventListener('click', function (event) {
+
+        // Bail if our clicked element doesn't match
+        var trigger = event.target.closest('[data-accordion-menu-nav]');
+        if (!trigger) return;
+
+        // Get the target content
+        var target = document.querySelector(trigger.hash);
+        if (!target) return;
+
+        // Prevent default link behavior
+        event.preventDefault();
+
+        // If the content is already expanded, collapse it and quit
+        if (target.classList.contains('active')) {
+          target.classList.remove('active');
+          return;
+        }
+        
+        // Get all open accordion content, loop through it, and close it
+        var accordions = document.querySelectorAll('[data-accordion-wrapper]');
+        for (var i = 0; i < accordions.length; i++) {
+          accordions[i].classList.remove('active');
+        }
+        
+        // Toggle our content
+        target.classList.toggle('active');
+      });
+
+    };
+
+    accordionMenu();
+
+  </script>
+
+</body>
+</html>
